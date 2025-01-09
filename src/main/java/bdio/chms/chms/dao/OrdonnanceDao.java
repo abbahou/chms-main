@@ -27,7 +27,7 @@ public class OrdonnanceDao {
 
     public List<Ordonnance> getAll() {
         try {
-            statement = Database.getConnection().createStatement();
+            statement = DatabaseConnection.getConnection().createStatement();
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
@@ -58,10 +58,10 @@ public class OrdonnanceDao {
     public ArrayList<Integer> getMedicamentsByOrdonnanceId(int ordonnanceId) throws SQLException {
         ArrayList<Integer> medicaments = new ArrayList<>();
         Integer id;
-        String query = "SELECT m.idmedicament FROM medicament m , ordonnance_medicament om where m.idmedicament = om.idmedicament and om.idordonnance = ?";
+        String query = "SELECT m.IDMedicament FROM medicament m , ordonnance_medicament om where m.IDMedicament = om.IDMedicament and om.IDOrdonnance = ?";
 
         try {
-            preparedStatement = Database.getConnection().prepareStatement(query);
+            preparedStatement = DatabaseConnection.getConnection().prepareStatement(query);
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
@@ -78,12 +78,12 @@ public class OrdonnanceDao {
 
     public void updateOrdonnance(Ordonnance ordonnance) throws SQLException {
         System.out.println(ordonnance);
-        String query1 = "UPDATE ordonnance SET status = ? WHERE idordonnance = ?";
-        String query2 = "UPDATE medicament SET qty = qty - ? WHERE idmedicament = ?";
+        String query1 = "UPDATE ordonnance SET status = ? WHERE IDOrdonnance = ?";
+        String query2 = "UPDATE medicament SET qty = qty - ? WHERE IDMedicament = ?";
 
         try {
-            preparedStatement = Database.getConnection().prepareStatement(query1);
-            preparedStatement2 = Database.getConnection().prepareStatement(query2);
+            preparedStatement = DatabaseConnection.getConnection().prepareStatement(query1);
+            preparedStatement2 = DatabaseConnection.getConnection().prepareStatement(query2);
 
         } catch (SQLException e1) {
             e1.printStackTrace();

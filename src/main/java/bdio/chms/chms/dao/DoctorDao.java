@@ -14,7 +14,7 @@ public class DoctorDao {
 
     public Doctor getDoctorById(int id) throws SQLException {
         try {
-            preparedStatement = Database.getConnection().prepareStatement("SELECT * FROM doctor WHERE iddoctor = ?");
+            preparedStatement =DatabaseConnection.getConnection().prepareStatement("SELECT * FROM doctor WHERE iddoctor = ?");
 
         } catch (SQLException e1) {
             e1.printStackTrace();
@@ -40,7 +40,7 @@ public class DoctorDao {
         String query = "SELECT * FROM speciality WHERE idspeciality = ?";
 
         try {
-            preparedStatement = Database.getConnection().prepareStatement("SELECT nomspeciality FROM doctor d,speciality s WHERE s.idspeciality =d.idspeciality and iddoctor=?");
+            preparedStatement = DatabaseConnection.getConnection().prepareStatement("SELECT nomspeciality FROM doctor d,speciality s WHERE s.idspeciality =d.idspeciality and iddoctor=?");
 
         } catch (SQLException e1) {
             e1.printStackTrace();

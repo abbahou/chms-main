@@ -14,7 +14,7 @@ public class PatientDao {
         Patient patient = null;
         String query = "SELECT * FROM patient WHERE idpatient = ?";
         try {
-            preparedStatement = Database.getConnection().prepareStatement(query);
+            preparedStatement = DatabaseConnection.getConnection().prepareStatement(query);
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
