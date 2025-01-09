@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2025 at 07:35 PM
+-- Generation Time: Jan 09, 2025 at 11:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -288,10 +288,9 @@ CREATE TABLE `medicament` (
 --
 
 INSERT INTO `medicament` (`IDMedicament`, `NomMed`, `DescMed`, `Prix_Unit`, `DateExpiration`, `Type`, `Qty`) VALUES
-                                                                                                                 (4, 'Amoxicillin', 'Antibiotic for bacterial infections', 12, '2025-10-15 00:00:00', 'Capsule', 300),
-                                                                                                                 (5, 'Cetirizine', 'Allergy relief', 6, '2026-03-31 00:00:00', 'Tablet', 250),
-                                                                                                                 (6, 'Metformin', 'Type 2 diabetes treatment', 10.5, '2024-11-20 00:00:00', 'Tablet', 180),
-                                                                                                                 (7, 'Omeprazole', 'Acid reflux and heartburn relief', 15, '2025-08-30 00:00:00', 'Capsule', 100);
+                                                                                                                 (1, 'Paracetamol', 'Pain reliever and fever reducer', 20.5, '2025-12-31 00:00:00', 'Tablet', 98),
+                                                                                                                 (2, 'Aspirin', 'Pain relief and blood thinner', 3.5, '2025-05-01 00:00:00', 'Tablet', 150),
+                                                                                                                 (3, 'Ibuprofen', 'Anti-inflammatory and pain reliever', 15, '2025-08-15 00:00:00', 'Tablet', 150);
 
 -- --------------------------------------------------------
 
@@ -335,8 +334,8 @@ CREATE TABLE `ordonnance` (
 --
 
 INSERT INTO `ordonnance` (`IDOrdonnance`, `IDDoctor`, `DateCreation`, `IDPharmacien`, `IDPatient`, `Status`) VALUES
-                                                                                                                 (1, 1, '2024-12-01 09:00:00', 1, 1, 'Completed'),
-                                                                                                                 (2, 2, '2024-12-02 10:30:00', 2, 2, 'Completed');
+                                                                                                                 (1, 1, '2025-01-01 10:00:00', 2, 1, 'Completed'),
+                                                                                                                 (3, 2, '2025-01-05 15:30:00', 1, 1, 'Active');
 
 -- --------------------------------------------------------
 
@@ -422,9 +421,8 @@ CREATE TABLE `ordonnance_medicament` (
 
 INSERT INTO `ordonnance_medicament` (`IDMedicament`, `IDOrdonnance`) VALUES
                                                                          (1, 1),
-                                                                         (2, 2),
-                                                                         (1, 1),
-                                                                         (2, 2);
+                                                                         (1, 3),
+                                                                         (3, 3);
 
 -- --------------------------------------------------------
 
@@ -589,6 +587,19 @@ ALTER TABLE `medicament`
     ADD PRIMARY KEY (`IDMedicament`);
 
 --
+-- Indexes for table `ordonnance`
+--
+ALTER TABLE `ordonnance`
+    ADD PRIMARY KEY (`IDOrdonnance`);
+
+--
+-- Indexes for table `ordonnance_medicament`
+--
+ALTER TABLE `ordonnance_medicament`
+    ADD PRIMARY KEY (`IDMedicament`,`IDOrdonnance`),
+  ADD KEY `fk_IDOrdonnance` (`IDOrdonnance`);
+
+--
 -- Indexes for table `pharmacien`
 --
 ALTER TABLE `pharmacien`
@@ -602,7 +613,24 @@ ALTER TABLE `pharmacien`
 -- AUTO_INCREMENT for table `medicament`
 --
 ALTER TABLE `medicament`
-    MODIFY `IDMedicament` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+    MODIFY `IDMedicament` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `ordonnance`
+--
+ALTER TABLE `ordonnance`
+    MODIFY `IDOrdonnance` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `ordonnance_medicament`
+--
+ALTER TABLE `ordonnance_medicament`
+    ADD CONSTRAINT `fk_IDMedicament` FOREIGN KEY (`IDMedicament`) REFERENCES `medicament` (`IDMedicament`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_IDOrdonnance` FOREIGN KEY (`IDOrdonnance`) REFERENCES `ordonnance` (`IDOrdonnance`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
