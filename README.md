@@ -14,6 +14,3 @@ and more.
 checkout the `chms.sql` file in the project root directory. 
 
 
-## Demo
-
-![Demo Video](output.mp4)
