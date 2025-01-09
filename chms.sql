@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2025 at 04:06 PM
+-- Generation Time: Jan 09, 2025 at 07:35 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -288,8 +288,10 @@ CREATE TABLE `medicament` (
 --
 
 INSERT INTO `medicament` (`IDMedicament`, `NomMed`, `DescMed`, `Prix_Unit`, `DateExpiration`, `Type`, `Qty`) VALUES
-                                                                                                                 (0, 'Vitamine C', 'Complément alimentaire pour renforcer le système immunitaire', 5.2, '2026-03-20 00:00:00', 'Complément', 15),
-
+                                                                                                                 (4, 'Amoxicillin', 'Antibiotic for bacterial infections', 12, '2025-10-15 00:00:00', 'Capsule', 300),
+                                                                                                                 (5, 'Cetirizine', 'Allergy relief', 6, '2026-03-31 00:00:00', 'Tablet', 250),
+                                                                                                                 (6, 'Metformin', 'Type 2 diabetes treatment', 10.5, '2024-11-20 00:00:00', 'Tablet', 180),
+                                                                                                                 (7, 'Omeprazole', 'Acid reflux and heartburn relief', 15, '2025-08-30 00:00:00', 'Capsule', 100);
 
 -- --------------------------------------------------------
 
@@ -334,11 +336,7 @@ CREATE TABLE `ordonnance` (
 
 INSERT INTO `ordonnance` (`IDOrdonnance`, `IDDoctor`, `DateCreation`, `IDPharmacien`, `IDPatient`, `Status`) VALUES
                                                                                                                  (1, 1, '2024-12-01 09:00:00', 1, 1, 'Completed'),
-                                                                                                                 (2, 1, '2024-12-01 09:00:00', 1, 2, 'Active'),
-                                                                                                                 (3, 1, '2024-12-01 09:00:00', 2, 3, 'Completed'),
-                                                                                                                 (4, 2, '2024-12-01 09:00:00', 1, 1, 'Completed'),
-                                                                                                                 (5, 2, '2024-12-01 09:00:00', 1, 2, 'Completed'),
-                                                                                                                 (6, 2, '2024-12-01 09:00:00', 2, 3, 'Active');
+                                                                                                                 (2, 2, '2024-12-02 10:30:00', 2, 2, 'Completed');
 
 -- --------------------------------------------------------
 
@@ -425,6 +423,8 @@ CREATE TABLE `ordonnance_medicament` (
 INSERT INTO `ordonnance_medicament` (`IDMedicament`, `IDOrdonnance`) VALUES
                                                                          (1, 1),
                                                                          (2, 2),
+                                                                         (1, 1),
+                                                                         (2, 2);
 
 -- --------------------------------------------------------
 
@@ -583,10 +583,26 @@ INSERT INTO `test` (`IDTest`, `Name`, `MaxVal`, `MinVal`, `Price`) VALUES
 --
 
 --
+-- Indexes for table `medicament`
+--
+ALTER TABLE `medicament`
+    ADD PRIMARY KEY (`IDMedicament`);
+
+--
 -- Indexes for table `pharmacien`
 --
 ALTER TABLE `pharmacien`
     ADD PRIMARY KEY (`IDPharmacien`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `medicament`
+--
+ALTER TABLE `medicament`
+    MODIFY `IDMedicament` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
